@@ -5,8 +5,9 @@ import android.content.Context
 class ConfiguracaoService(context: Context) {
     var configuracaoDao: ConfiguracaoDAO
     init{
-        configuracaoDao = ConfiguracaoSharedPreferences(context)
-        // configuracaoDao = ConfiguracaoSqlite(context)
+        // Inicia conforme a fonte de dados utilizada
+        // configuracaoDao = ConfiguracaoSharedPreferences(context)
+        configuracaoDao = ConfiguracaoSqlite(context)
     }
 
     fun setConfiguracao(configuracao: Configuracao) {
