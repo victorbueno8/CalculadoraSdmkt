@@ -10,7 +10,25 @@ import androidx.fragment.app.Fragment
 import br.edu.ifsp.scl.calculadorasdmkt.R
 import br.edu.ifsp.scl.calculadorasdmkt.utils.Calculadora
 import br.edu.ifsp.scl.calculadorasdmkt.utils.Operador
+import kotlinx.android.synthetic.main.fragment_calculadora_avancada.*
 import kotlinx.android.synthetic.main.fragment_calculadora_basica.*
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.adicaoBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.cincoBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.divisaoBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.doisBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.lcdTv
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.multiplicacaoBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.noveBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.oitoBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.pontoBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.quatroBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.resultadoBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.seisBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.seteBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.subtracaoBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.tresBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.umBt
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.zeroBt
 
 class CalculadoraBasicaFragment: Fragment(), View.OnClickListener {
     var concatenaLcd: Boolean = true

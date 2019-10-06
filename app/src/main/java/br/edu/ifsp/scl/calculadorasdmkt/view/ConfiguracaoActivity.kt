@@ -62,5 +62,7 @@ class ConfiguracaoActivity: AppCompatActivity() {
         configuracaoController.salvaConfiguracao(novaConfiguracao)
 
         Toast.makeText(this, "Configuração Salva", Toast.LENGTH_SHORT).show()
+
+        this.finish()
     }
 }

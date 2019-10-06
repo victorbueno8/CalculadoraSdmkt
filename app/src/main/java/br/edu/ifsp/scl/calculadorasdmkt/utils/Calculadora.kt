@@ -1,8 +1,10 @@
 package br.edu.ifsp.scl.calculadorasdmkt.utils
 
+import kotlin.math.sqrt
+
 /* Classe de enumeração para constantes de operadores */
 enum class Operador {
-    RESULTADO, ADICAO, SUBTRACAO, MULTIPLICACAO, DIVISAO
+    RESULTADO, ADICAO, SUBTRACAO, MULTIPLICACAO, DIVISAO, PORCENTAGEM, RAIZ
 }
 
 /* Singleton que calcula operações aritméticas básicas */
@@ -26,6 +28,11 @@ object Calculadora {
             Operador.DIVISAO -> operando /= valor
         }
         Calculadora.operador = operador
+        // Operadores que mostram resultado instantaneo
+        when (Calculadora.operador) {
+            Operador.PORCENTAGEM -> operando = valor / 100
+            Operador.RAIZ -> operando = sqrt(valor)
+        }
         return operando
     }
 }
