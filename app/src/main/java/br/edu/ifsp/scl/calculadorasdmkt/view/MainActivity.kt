@@ -4,9 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.calculadorasdmkt.R
+import br.edu.ifsp.scl.calculadorasdmkt.controller.ConfiguracaoController
 import br.edu.ifsp.scl.calculadorasdmkt.model.Configuracao
+import br.edu.ifsp.scl.calculadorasdmkt.model.ConfiguracaoService
+import br.edu.ifsp.scl.calculadorasdmkt.model.Separador
+import kotlinx.android.synthetic.main.fragment_calculadora_basica.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,8 +24,10 @@ class MainActivity : AppCompatActivity() {
         toolbar.title = getString(R.string.app_name)
         setSupportActionBar(toolbar)
 
-        // Fragment
-        supportFragmentManager.beginTransaction().replace(R.id.calculadoraFl, CalculadoraBasicaFragment()).commit()
+        val configService: ConfiguracaoService = ConfiguracaoService(this.applicationContext)
+        val configuracao: Configuracao = configService.getConfiguracao()
+
+        loadConfigView(configuracao)
     }
 
     // Cria o menu
@@ -59,14 +66,19 @@ class MainActivity : AppCompatActivity() {
             // Pegar configuração retornada
             val configuracao = data?.getParcelableExtra<Configuracao>(ConfiguracaoActivity.Constantes.CONFIGURACAO)
 
-            if (configuracao!!.leiauteAvancado) {
-                // Fragment Avançada
-                supportFragmentManager.beginTransaction().replace(R.id.calculadoraFl, CalculadoraAvancadaFragment()).commit()
-            }
-            else {
-                // Fragment Básica
-                supportFragmentManager.beginTransaction().replace(R.id.calculadoraFl, CalculadoraBasicaFragment()).commit()
-            }
+            loadConfigView(configuracao)
+        }
+
+    }
+
+    private fun loadConfigView(configuracao: Configuracao?) {
+        if (configuracao!!.leiauteAvancado) {
+            // Fragment Avançada
+            supportFragmentManager.beginTransaction().replace(R.id.calculadoraFl, CalculadoraAvancadaFragment(configuracao)).commit()
+        }
+        else {
+            // Fragment Básica
+            supportFragmentManager.beginTransaction().replace(R.id.calculadoraFl, CalculadoraBasicaFragment(configuracao)).commit()
         }
 
     }

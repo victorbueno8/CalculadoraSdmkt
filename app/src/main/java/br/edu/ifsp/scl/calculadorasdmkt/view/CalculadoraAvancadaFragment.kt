@@ -8,6 +8,8 @@ import android.widget.Button
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import br.edu.ifsp.scl.calculadorasdmkt.R
+import br.edu.ifsp.scl.calculadorasdmkt.model.Configuracao
+import br.edu.ifsp.scl.calculadorasdmkt.model.Separador
 import br.edu.ifsp.scl.calculadorasdmkt.utils.Calculadora
 import br.edu.ifsp.scl.calculadorasdmkt.utils.Operador
 import kotlinx.android.synthetic.main.fragment_calculadora_avancada.*
@@ -29,7 +31,7 @@ import kotlinx.android.synthetic.main.fragment_calculadora_avancada.tresBt
 import kotlinx.android.synthetic.main.fragment_calculadora_avancada.umBt
 import kotlinx.android.synthetic.main.fragment_calculadora_avancada.zeroBt
 
-class CalculadoraAvancadaFragment: Fragment(), View.OnClickListener {
+class CalculadoraAvancadaFragment(val configuracao: Configuracao): Fragment(), View.OnClickListener {
     var concatenaLcd: Boolean = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -50,11 +52,11 @@ class CalculadoraAvancadaFragment: Fragment(), View.OnClickListener {
             }
             // Ponto
             pontoBt -> {
-                if (!lcdTv.text.toString().contains(".")){
+                if (!lcdTv.text.toString().contains(pontoBt.text)){
                     if (!concatenaLcd) {
                         lcdTv.text = "0"
                     }
-                    lcdTv.append(".")
+                    lcdTv.append(pontoBt.text)
                     concatenaLcd = true
                 }
             }
@@ -88,6 +90,15 @@ class CalculadoraAvancadaFragment: Fragment(), View.OnClickListener {
             if (v is Button) {
                 v.setOnClickListener(::onClick)
             }
+        }
+
+        val separadorBt: Button = getView()!!.findViewById(R.id.pontoBt)
+        if (configuracao.separador == Separador.VIRGULA) {
+            separadorBt.setText(",")
+            println("Adicionado VIRGULA")
+        } else {
+            separadorBt.setText(".")
+            println("Adicionado Ponto")
         }
     }
 }
